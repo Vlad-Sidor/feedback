@@ -5,8 +5,7 @@ const EMAIL = "politra.tvorchestva@gmail.com";
 const MAIN_URL = "politra.herokuapp.com";
 
 let transporter = nodemailer.createTransport({
-  service: "gmail",
-  secure: true,
+  service: "Gmail",
   auth: {
     user: "politra.tvorchestva@gmail.com",
     pass: "f189515633F",
@@ -24,15 +23,15 @@ let MailGenerator = new Mailgen({
 const sendFeedback = (req, res) => {
   let response = {
     body: {
-      name,
+      name: "FeedBack",
       intro: "Обратная связь",
       table: {
         data: [
           {
             Name: req.body.Name,
             Competion: req.body.Competion,
-            URL: req.body?.URL,
-            Text: req.body.text,
+            URL: req.body.URL,
+            Text: req.body.Text,
           },
         ],
       },
@@ -54,7 +53,7 @@ const sendFeedback = (req, res) => {
     .then(() => {
       return res
         .status(200)
-        .json({ msg: "you should receive an email from us" });
+        .json({ msg: "Message was sent!" });
     })
     .catch((error) => console.error(error));
 };
