@@ -7,7 +7,7 @@ const router = express.Router();
 router.post("/sendFeedBack", sendFeedback);
 
 router.get("/", (req, res) => {
-    res.status(200).send("WHATABYTE: Food For Devs");
+    res.render('index');
   });
 
 module.exports = router;
