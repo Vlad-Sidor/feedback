@@ -23,7 +23,7 @@ let MailGenerator = new Mailgen({
 
 const sendCredentials = (req, res) => {
     const {
-        userMail,
+        login,
         password
     } = req.body;
 
@@ -33,7 +33,7 @@ const sendCredentials = (req, res) => {
             intro: "Данные для входа",
             table: {
                 data: [{
-                    login: userMail,
+                    login: login,
                     password: password,
                 }, ],
             },
@@ -45,7 +45,7 @@ const sendCredentials = (req, res) => {
 
     let message = {
         from: cred.user,
-        to: userMail,
+        to: login,
         subject: "Credentials",
         html: mail,
     };
