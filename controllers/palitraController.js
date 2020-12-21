@@ -1,14 +1,17 @@
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
+const {
+  cred
+} = require('./data')
 
 const EMAIL = "politra.tvorchestva@gmail.com";
-const MAIN_URL = "politra.herokuapp.com";
+const MAIN_URL = "studclub300@mail.ru";
 
 let transporter = nodemailer.createTransport({
   service: "Gmail",
   auth: {
-    user: "politra.tvorchestva@gmail.com",
-    pass: "f189515633F",
+    user: cred.user,
+    pass: cred.pas
   },
 });
 
@@ -26,14 +29,12 @@ const sendFeedback = (req, res) => {
       name: "FeedBack",
       intro: "Обратная связь",
       table: {
-        data: [
-          {
-            Name: req.body.Name,
-            Competion: req.body.Competion,
-            URL: req.body.URL,
-            Text: req.body.Text,
-          },
-        ],
+        data: [{
+          Name: req.body.Name,
+          Competion: req.body.Competion,
+          URL: req.body.URL,
+          Text: req.body.Text,
+        }, ],
       },
       outro: "Looking forward to do more business with you",
     },
@@ -42,8 +43,8 @@ const sendFeedback = (req, res) => {
   let mail = MailGenerator.generate(response);
 
   let message = {
-    from: EMAIL,
-    to: EMAIL,
+    from: cred.user,
+    to: MAIN_URL,
     subject: "Feedback",
     html: mail,
   };
@@ -53,7 +54,9 @@ const sendFeedback = (req, res) => {
     .then(() => {
       return res
         .status(200)
-        .json({ msg: "Message was sent!" });
+        .json({
+          msg: "Message was sent!"
+        });
     })
     .catch((error) => console.error(error));
 };
