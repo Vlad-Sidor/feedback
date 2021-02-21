@@ -59,7 +59,12 @@ const sendCredentials = (req, res) => {
                     msg: "Message was sent!"
                 });
         })
-        .catch((error) => console.error(error));
+        .catch((er) => {
+            return res.status(500).json({
+                msg: "Smth hepend",
+                er: er
+            })
+        });
 };
 
 module.exports = {
