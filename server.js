@@ -1,9 +1,9 @@
 const express = require("express");
 var cors = require("cors");
 
-const appRoute = require("./routes/appRoute.js");
-
 const app = express();
+
+const appRoute = require("./routes/appRoute.js");
 
 const PORT = process.env.PORT || 3000;
 
