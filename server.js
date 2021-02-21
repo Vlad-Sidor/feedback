@@ -7,7 +7,9 @@ const appRoute = require("./routes/appRoute.js");
 
 const PORT = process.env.PORT || 3000;
 
-app.use(cors());
+app.use(cors({
+    origin: '*'
+}))
 
 app.set("view engine", "ejs");
 
