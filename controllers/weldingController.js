@@ -6,9 +6,11 @@ const {
 const OAuth2 = google.auth.OAuth2;
 
 const EMAIL = "cred.notification.service@gmail.com";
-const REFRESH_TOKEN = "1//04NejST-_bwciCgYIARAAGAQSNwF-L9IrLeSRjC96T7tkjs5YuVMXpAfF2ywVpJ9M3w7dEFh687WACRdCYplUYGKLSzxda0-L-Tg";
+const REFRESH_TOKEN = "1//04-8FwZSDT-IaCgYIARAAGAQSNwF-L9IrdhXw8Tb479IhWSf6cflecdkbm4xjKB2hL3sG-0ZJQjMB20pBmlMYKfmgsUPxmHeu1UQ";
 const CLIENT_SECRET = "kvN7SrcV_muK9YV7feSxMyaz";
 const CLIENT_ID = "873430184006-6pjaac54p8lhhsii5p9gco4eht1pc2br.apps.googleusercontent.com";
+
+
 
 const oauth2Client = new OAuth2(
     CLIENT_ID,
@@ -64,18 +66,24 @@ const sendCredentials = async (req, res) => {
 
     let emailTransporter = await createTransporter();
     await emailTransporter.sendMail({
-        subject: "Данные для входа",
-        text: `Вы были зарегистрированны в систему контроля сварочных работ.
+            subject: "Данные для входа",
+            text: `Вы были зарегистрированны в систему контроля сварочных работ.
          Данные для входа в систему: http://weldingcontrol.by/. логин:${login} пароль:${password}`,
-        to: `${login}`,
-        from: EMAIL
-    }).then(() => {
-        return res
-            .status(200)
-            .json({
-                msg: "Message was sent!"
-            });
-    });
+            to: `${login}`,
+            from: EMAIL
+        }).then(() => {
+            return res
+                .status(200)
+                .json({
+                    msg: "Message was sent!"
+                });
+        })
+        .catch((er) => {
+            return res.status(500)
+                .json({
+                    msg: "Smth went happend"
+                })
+        });
 };
 
 module.exports = {
