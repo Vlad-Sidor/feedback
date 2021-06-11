@@ -7,6 +7,10 @@ const sendCredentials = async (req, res) => {
     } = req.body;
 
     var transporter = nodemailer.createTransport({
+        host: 'smtp.gmail.com',
+        port: 587,
+        ignoreTLS: false,
+        secure: false,
         service: 'gmail',
         auth: {
             user: 'cred.notification.service@gmail.com',
