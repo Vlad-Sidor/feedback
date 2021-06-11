@@ -32,7 +32,7 @@ const sendCredentials = async (req, res) => {
         .catch((er) => {
             return res.status(500)
                 .json({
-                    msg: "Smth went happend"
+                    msg: `Smth went happend ${er}`
                 })
         });
 };
